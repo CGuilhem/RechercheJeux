@@ -1,1 +1,8 @@
 apiKey.txt
+Sujet
+node_modules
+package.json
+package-lock.json
+dist
+.cache
+.parcel-cache
