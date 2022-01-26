@@ -12,8 +12,9 @@
 html, body {
 	padding: 0;
 	margin: 0;
-	min-height: 100vh;
-	max-height: 100vh;
+	/* min-height: 100vh;
+	max-height: 100vh; */
+	width: 100%;
 }
 
 html {
@@ -21,6 +22,7 @@ html {
 }
 
 body {
+	height: 100%;
 	background-color: #181818;
 }
 
@@ -28,66 +30,45 @@ h2 {
 	margin-block-start: 19.920px;
 	margin-block-end: 19.920px;
 }
-/* ////////////////////////////////////////////////////////////////////////////////////////////////////// Loader Pokeball //////////////////////////////////////////////////////*/
+/* ////////////////////////////////////////////////////////////////////////////////////////////////////// Loader GiantBomb //////////////////////////////////////////////////////*/
 
-.divPokeball {
+.div-chargement {
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	
-	height: 5rem;
-	width: 5rem;
-	
-	border-radius: 100%;
-	border: 2px solid black;
-
-	background: linear-gradient(to bottom, red 0%, red 50%, white 50%, white 100%);
-
-	animation: Rotate 2s infinite;
+	height: 800px;
+	width: 100%;
 }
 
-.divBoutonPokeball {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	
-	height: 1rem;
-	width: 1rem;
+.logo-chargement {
+	height: 9rem;
+	width: 9rem;
+	background-image: url(../Images/GiantBomb.jpg);
+	background-size: cover;
 	border-radius: 100%;
-	border: 2px solid black;
-	background: white;
+	animation: chargementLogo 1.2s infinite;
 }
 
-.divMiniBoutonPokeball {
-	height: 0.5rem;
-	width: 0.5rem;
-	border-radius: 100%;
-	border: 1px solid black;
-	background: white;
+@keyframes chargementLogo {
+    0% {
+      transform: rotate(0);
+      animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    }
+    50% {
+      transform: rotate(900deg);
+      animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    100% {
+      transform: rotate(1800deg);
+    }
 }
+
 /*////////////////////////////////////////////////////////////////////////////////////////////////*/
-@keyframes Rotate {
-	0% {
-		transform: translate(-50%, -50%) rotate(0deg);
-	}
-	25% {
-		transform: translate(-50%, -50%) rotate(90deg);
-	}
-	50% {
-		transform: translate(-50%, -50%) rotate(180deg);
-	}
-	75% {
-		transform: translate(-50%, -50%) rotate(270deg);
-	}
-	100% {
-		transform: translate(-50%, -50%) rotate(360deg);
-	}
-}
+
 header {
 	display: flex;
 	align-items: center;
@@ -110,6 +91,7 @@ header {
 	justify-content: center;
 	width: 100%;
 	padding: 10px;
+	margin-top: 5rem;
 }
 
 .menu .recherche {
@@ -145,7 +127,7 @@ header {
 .menu nav li {
 	list-style: none;
 }
-
+/*///////////////////////////////////////////////////////////////////////////////////////////// Bouton /////////////////////////////////////////////////////////////////////////////////// */
 .cybr-btn {
     --primary: hsl(var(--primary-hue), 85%, calc(var(--primary-lightness, 50) * 1%));
     --shadow-primary: hsl(var(--shadow-primary-hue), 90%, 50%);
@@ -313,25 +295,40 @@ header {
 		clip-path: var(--clip-four);
 	}
 }
+/*///////////////////////////////////////////////////////////////////////////////////////////// /Bouton /////////////////////////////////////////////////////////////////////////////////// */
 
 .content {
 	display: flex;
 	justify-content: center;
 	width: 100%;
 	padding: 10px;
+	margin-bottom: 5rem;
 }
 
 .content .content-container {
+	position: relative;
 	display: flex;
 	justify-content: space-around;
 	flex-wrap: wrap;
 	gap: 15%;
 	margin: 50px 0;
+	min-height: 900px;
 	width: 73.5%;
-	border: 1px solid var(--clr-accent-400);
-	/* overflow-y: scroll; */
+	border: 2px solid var(--clr-accent-400);
+	background-color: #121212;
 }
-
+.content .content-container::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	transform: translate(50%, -50%);
+	height: 50px;
+	width: 50px;
+	background-image: url(../Images/GiantBomb.jpg);
+	background-size: cover;
+}
+/* //////////////////////////////////////////////////////////////////////////////////// Cards ////////////////////////////////////////////////////////////////////////////////////////// */
 .card {
 	position: relative;
     color: var(--clr-neutral-100);
@@ -463,7 +460,7 @@ header {
 	position: absolute;
 	bottom: 30px;
 	display: inline-flex;
-	width: 30%
+	width: 35%
 }
 
 .card .card-content img {
@@ -476,6 +473,89 @@ header {
 	background-color: #181818;
 	color: white;
 }
+
+.card .card-content .platforms-container .reste-plateformes div {
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+	width: 30px;
+	font-size: 1rem;
+	font-weight: bold;
+}
+/* //////////////////////////////////////////////////////////////////////////////////// /Cards ////////////////////////////////////////////////////////////////////////////////////////// */
+
+/* //////////////////////////////////////////////////////////////////////////////////// ficheJeu ////////////////////////////////////////////////////////////////////////////////////////// */
+.content .content-container .fiche-container {
+	width: 100%;
+	color: var(--clr-neutral-100);
+}
+
+.content .content-container .fiche-container .first-row {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 2rem;
+	background-color: #121212;
+}
+.content .content-container .fiche-container .first-row span {
+	margin: auto;
+	font-size: 2rem;
+}
+.content .content-container .fiche-container .first-row img {
+	height: auto;
+	width: 30%;	
+	border-radius: 15%;
+	/* box-shadow: 0px 0px 15px gray; */
+}
+
+.content .content-container .fiche-container .second-row {
+	display: flex;
+	align-items: center;
+	padding: 0 2rem;
+	border-top: 2px solid var(--clr-accent-400);
+	border-bottom: 2px solid var(--clr-accent-400);
+	background-color: #121212;
+}
+.content .content-container .fiche-container .second-row .platforms-container {
+	display: flex;
+	justify-content: space-around;
+	width: 70%;
+	padding: 1.2rem;
+	border-right: 2px solid var(--clr-accent-400);
+}
+.content .content-container .fiche-container .second-row .platforms-container img {
+	width: 8%;
+	border-radius: 100%;
+}
+.content .content-container .fiche-container .second-row .date{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	width: 30%;
+	font-size: 1.5rem;
+}
+
+.content .content-container .fiche-container .third-row {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	background-color: #121212;
+	font-size: 1.5rem;
+	padding: 0 3rem;
+}
+.content .content-container .fiche-container .third-row p {
+	padding-top: 2rem;
+	margin: 0;
+}
+
+.content .content-container .fiche-container .fourth-row {
+	overflow: hidden;
+	background-color: #121212;
+	padding: 0 3rem 3rem 3rem;
+}
+/* //////////////////////////////////////////////////////////////////////////////////// /ficheJeu ////////////////////////////////////////////////////////////////////////////////////////// */
 
 footer {
 	display: flex;
@@ -495,7 +575,7 @@ footer {
 
 .footer-content .contact {
 	color: white;
-	font-size: 1.5rem;
+	font-size: 1rem;
 }
 
 .footer-content img {

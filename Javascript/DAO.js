@@ -5,15 +5,16 @@ export default class DAO {
     static #mapJeux = new Map();
 
     static async telechargerDonneesJeux(recherche) {
+        this.#mapJeux.clear();
         try {
             if (recherche !== "") {
 
-                this.#url += recherche;
+                const urlRequest = this.#url + recherche;
 
-                const resRequeteJeux = await fetch(this.#url);
+                const resRequeteJeux = await fetch(urlRequest);
                 const jsonResRequeteJeux = await resRequeteJeux.json();
                 const listeJeux = jsonResRequeteJeux.results;
-                if (!listeJeux || !Array.isArray(listeJeux) || listeJeux.length === 0) {
+                if (!listeJeux || !Array.isArray(listeJeux)) {
                     throw new Error("Les données de la réponse ne sont pas conformes");
                 }
 
@@ -25,7 +26,7 @@ export default class DAO {
                 return this.#mapJeux;          
             } else {
                 alert("La recherche est vide !");
-                return null;
+                return new Map();
             }
         } catch(error) {
             console.error(error);

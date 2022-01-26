@@ -7,7 +7,6 @@ export default class App {
     static boutonRecherche;
 
     static init() {
-        console.log("init");
         this.barreRecherche = document.querySelector(".barre-recherche");
         if (!this.barreRecherche) {
             throw new Error("La classe barre-recherche est introuvable");
@@ -30,17 +29,13 @@ export default class App {
 		//Je vide le contenu de contentContainer
 		this.contentContainer.innerHTML = "";
 
-		const divPokeball = document.createElement("div");  		
-        divPokeball.classList.add("divPokeball");
-        this.contentContainer.append(divPokeball);
-    
-        const divBoutonPokeball = document.createElement("div");
-        divBoutonPokeball.classList.add("divBoutonPokeball");
-        divPokeball.append(divBoutonPokeball);
-    
-        const divMiniBoutonPokeball = document.createElement("div");
-        divMiniBoutonPokeball.classList.add("divMiniBoutonPokeball");
-        divBoutonPokeball.append(divMiniBoutonPokeball); /* Dans la div bouton, j'affiche la mini */
+		const divChargement = document.createElement("div");    // Afficher un chargement en attendant le téléchargement des données
+        divChargement.classList.add("div-chargement");
+        this.contentContainer.append(divChargement);
+
+        const logoChargement = document.createElement("div");
+        logoChargement.classList.add("logo-chargement");
+        divChargement.append(logoChargement);/* Dans la div bouton, j'affiche la mini */
 	}
 }
 

@@ -29,9 +29,11 @@ export default class Jeu {
         this.descriptionLongue = jsonJeu.description;
 
         if (jsonJeu.original_release_date !== null) {
-            this.date = jsonJeu.original_release_date;
+            this.date = "Date de sortie : "
+            this.date += jsonJeu.original_release_date;
         } else {
-            this.date = jsonJeu.expected_release_year;
+            this.date = "Année de sortie attendue : "
+            this.date += jsonJeu.expected_release_year;
         }
     }
 }
