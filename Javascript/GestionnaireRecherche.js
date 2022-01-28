@@ -87,7 +87,7 @@ export default class GestionnaireRecherche {
         }
     }
     
-    static async afficherFicheJeu(jeu) {
+    static async afficherFicheJeu(jeu, presentFavoris = undefined) {
         
         App.contentContainer.innerHTML = "";
 
@@ -98,16 +98,8 @@ export default class GestionnaireRecherche {
         const ficheContainer = document.createElement("div");
         ficheContainer.classList.add("fiche-container");
         ficheContainer.innerHTML = `
-            <div class="first-row">
-                <div class="container"> 
-                    <span class="name">${jeu.nom}</span>
-                    <button class="cybr-btn">
-						Ajouter aux favoris
-						<span class="cybr-btn__glitch">Ajouter_</span>
-						<span class="cybr-btn__tag">R25</span>
-					</button>
-                </div>    
-                <img src="${jeu.imageSmall}" alt="Photo du jeu ${jeu.nom}" class="game-picture">
+            <div class="first-row">   
+
             </div>
             <div class="second-row">
                 <div class="platforms-container"></div>
@@ -120,6 +112,47 @@ export default class GestionnaireRecherche {
                 <p>${jeu.descriptionLongue}</p>
             </div>
         `;
+        if (presentFavoris === "presentFavoris") {
+            const firstRow = ficheContainer.querySelector(".first-row");
+            const container = document.createElement("div");
+            container.classList.add("container");
+            container.innerHTML = `
+                <span class="name">${jeu.nom}</span>
+                <button class="cybr-btn">
+                    Retirer des favoris
+                    <span class="cybr-btn__glitch">Retirer_</span>
+                    <span class="cybr-btn__tag">R25</span>
+                </button>
+            `;
+            firstRow.append(container);
+
+            const imageJeu = document.createElement("img");
+            imageJeu.src = jeu.imageSmall;
+            imageJeu.alt = `"Photo du jeu ${jeu.nom}"`;
+            imageJeu.classList.add("game-picture");
+
+            firstRow.append(imageJeu);
+        } else {
+            const firstRow = ficheContainer.querySelector(".first-row");
+            const container = document.createElement("div");
+            container.classList.add("container");
+            container.innerHTML = `
+                <span class="name">${jeu.nom}</span>
+                <button class="cybr-btn">
+                    Ajouter aux favoris
+                    <span class="cybr-btn__glitch">Ajouter_</span>
+                    <span class="cybr-btn__tag">R25</span>
+                </button>
+            `;
+            firstRow.append(container);
+
+            const imageJeu = document.createElement("img");
+            imageJeu.src = jeu.imageSmall;
+            imageJeu.alt = `"Photo du jeu ${jeu.nom}"`;
+            imageJeu.classList.add("game-picture");
+
+            firstRow.append(imageJeu);
+        }
 
         const platformsContainer = ficheContainer.querySelector(".platforms-container");
         for (let x = 0; x < jeu.plateformes.length; x++) {
@@ -136,10 +169,18 @@ export default class GestionnaireRecherche {
             platformsContainer.append(iconePlateforme);
         }
 
-        const boutonAjouterFavoris = ficheContainer.querySelector(".cybr-btn");
-        boutonAjouterFavoris.addEventListener("click", () => {
-            DAO.ajouterAuxFavoris(jeu);
-        });
+        if (presentFavoris === "presentFavoris") {
+            const boutonAjouterFavoris = ficheContainer.querySelector(".cybr-btn");
+                boutonAjouterFavoris.addEventListener("click", () => {
+                DAO.retirerDesFavoris(jeu);
+            });
+        } else {
+            const boutonAjouterFavoris = ficheContainer.querySelector(".cybr-btn");
+                boutonAjouterFavoris.addEventListener("click", () => {
+                DAO.ajouterAuxFavoris(jeu);
+            });
+        }
+        
 
         // Fin affichage du loader
         App.contentContainer.innerHTML = "";                    

@@ -40,6 +40,11 @@ export default class DAO {
         this.#sauvegarderMesFavoris();
     }
 
+    static retirerDesFavoris(jeu) {
+        this.#mesJeux.delete(jeu.guid);
+        this.#sauvegarderMesFavoris();
+    }
+
     static #sauvegarderMesFavoris() {
         const tableauMesFavoris = Array.from(this.#mesJeux.values());
         window.localStorage.setItem("mesJeux", JSON.stringify(tableauMesFavoris));  // à chaque fois, je repasserai ici avec la même clé donc j'écraserai le contenu de l'ancienne map

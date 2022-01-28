@@ -6,7 +6,7 @@ import GestionnaireRecherche from "./GestionnaireRecherche";
 export default class GestionnaireFavoris {
 
     static #apiKeyPlateformes = "?api_key=eaa76483af84e465ae49aa95536b55edf29396b4&format=json";
-    
+
     static async clickBoutonFavoris() {
 
         App.afficherLoaderContentContainer();                              // Début  affichage loader
@@ -81,7 +81,7 @@ export default class GestionnaireFavoris {
 
             const boutonJeu = divCard.querySelector(".button");
             boutonJeu.addEventListener("click", () => {
-                GestionnaireRecherche.afficherFicheJeu(jeu);
+                GestionnaireRecherche.afficherFicheJeu(jeu, "presentFavoris");
             });
         }
     }
