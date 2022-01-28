@@ -1,10 +1,12 @@
 import DAO from "./DAO";
 import GestionnaireRecherche from "./GestionnaireRecherche";
+import GestionnaireFavoris from "./GestionnaireFavoris";
 
 export default class App {
     static contentContainer;
     static barreRecherche;
     static boutonRecherche;
+    static boutonFavoris;
 
     static init() {
         this.barreRecherche = document.querySelector(".barre-recherche");
@@ -16,8 +18,13 @@ export default class App {
         if (!this.boutonRecherche) {
             throw new Error("La classe bouton-recherche est introuvable");
         }
-
         this.boutonRecherche.addEventListener("click", GestionnaireRecherche.clickBoutonRecherche.bind(GestionnaireRecherche));
+
+        this.boutonFavoris = document.querySelector(".bouton-favoris");
+        if (!this.boutonFavoris) {
+            throw new Error("La classe bouton-favoris est introuvable");
+        }
+        this.boutonFavoris.addEventListener("click", GestionnaireFavoris.clickBoutonFavoris.bind(GestionnaireFavoris));
 
         this.contentContainer = document.querySelector(".content-container");
         if (!this.contentContainer) {

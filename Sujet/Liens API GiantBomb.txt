@@ -1,0 +1,8 @@
+Inscription :
+https://www.giantbomb.com/login-signup/
+
+Obtenir votre clé API :
+https://www.giantbomb.com/api/
+
+Documentation :
+https://www.giantbomb.com/api/documentation/

@@ -45,10 +45,12 @@ h2 {
 }
 
 .logo-chargement {
-	height: 9rem;
-	width: 9rem;
-	background-image: url(../Images/GiantBomb.jpg);
-	background-size: cover;
+	height: 12rem;
+	width: 12rem;
+	background-image: url(../Images/GiantBomb.png);
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
 	border-radius: 100%;
 	animation: chargementLogo 1.2s infinite;
 }
@@ -202,7 +204,7 @@ header {
 	bottom: -5%;
 	right: 5%;
 	font-weight: normal;
-	color: hsl(0, 0%, 0%);
+	color: #cbcbcb;
 	font-size: var(--label-size);
 }
 
@@ -314,7 +316,6 @@ header {
 	margin: 50px 0;
 	min-height: 900px;
 	width: 73.5%;
-	border: 2px solid var(--clr-accent-400);
 	background-color: #121212;
 }
 .content .content-container::before {
@@ -323,10 +324,12 @@ header {
 	top: 0;
 	right: 0;
 	transform: translate(50%, -50%);
-	height: 50px;
-	width: 50px;
-	background-image: url(../Images/GiantBomb.jpg);
-	background-size: cover;
+	height: 75px;
+	width: 75px;
+	background-image: url(../Images/GiantBomb.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
 }
 /* //////////////////////////////////////////////////////////////////////////////////// Cards ////////////////////////////////////////////////////////////////////////////////////////// */
 .card {
@@ -497,14 +500,36 @@ header {
 	padding: 2rem;
 	background-color: #121212;
 }
-.content .content-container .fiche-container .first-row span {
-	margin: auto;
-	font-size: 2rem;
+.content .content-container .fiche-container .first-row .container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-left: auto;
+	margin-right: auto;
+	height: 20rem;
 }
-.content .content-container .fiche-container .first-row img {
+.content .content-container .fiche-container .first-row .container button {
+	z-index: 1;
+	font-size: 1rem;
+}
+.content .content-container .fiche-container .first-row .container .name {
+	margin: auto;
+	font-size: 3rem;
+	z-index: 1;
+}
+@media all and (max-width: 1440px) {
+	.content .content-container .fiche-container .first-row .container button {
+		font-size: 0.8rem;
+	}
+    .content .content-container .fiche-container .first-row .container .name {
+		font-size: 1.5rem;
+	}
+}
+.content .content-container .fiche-container .first-row .game-picture {
 	height: auto;
 	width: 30%;	
 	border-radius: 15%;
+	z-index: 1;
 	/* box-shadow: 0px 0px 15px gray; */
 }
 

@@ -1,19 +1,18 @@
-import App from "./App";
-import DAO from "./DAO";
+import DAO from "./DAO"
+import App from "./App"
 import Jeu from "./Models/Jeu"
+import GestionnaireRecherche from "./GestionnaireRecherche";
 
-export default class GestionnaireRecherche {
+export default class GestionnaireFavoris {
 
     static #apiKeyPlateformes = "?api_key=eaa76483af84e465ae49aa95536b55edf29396b4&format=json";
+    
+    static async clickBoutonFavoris() {
 
-    static async clickBoutonRecherche() {
-
-        // Affichage du loader
-        App.afficherLoaderContentContainer();                   
-         const mapJeux = await DAO.telechargerDonneesJeux(App.barreRecherche.value);
-        App.contentContainer.innerHTML = "";                    
-        // Fin affichage du loader
-
+        App.afficherLoaderContentContainer();                              // Début  affichage loader
+        const mapJeux = DAO.chargerMesJeux();
+        App.contentContainer.innerHTML = "";                               // Fin affichage loader
+        
         const tableauJeux = Array.from(mapJeux.values());
         for (let i = 0; i < tableauJeux.length; i++) {
 
@@ -82,67 +81,8 @@ export default class GestionnaireRecherche {
 
             const boutonJeu = divCard.querySelector(".button");
             boutonJeu.addEventListener("click", () => {
-                this.afficherFicheJeu(jeu);
+                GestionnaireRecherche.afficherFicheJeu(jeu);
             });
         }
-    }
-    
-    static async afficherFicheJeu(jeu) {
-        
-        App.contentContainer.innerHTML = "";
-
-        // Affichage du loader
-        App.afficherLoaderContentContainer();                   
-
-
-        const ficheContainer = document.createElement("div");
-        ficheContainer.classList.add("fiche-container");
-        ficheContainer.innerHTML = `
-            <div class="first-row">
-                <div class="container"> 
-                    <span class="name">${jeu.nom}</span>
-                    <button class="cybr-btn">
-						Ajouter aux favoris
-						<span class="cybr-btn__glitch">Ajouter_</span>
-						<span class="cybr-btn__tag">R25</span>
-					</button>
-                </div>    
-                <img src="${jeu.imageSmall}" alt="Photo du jeu ${jeu.nom}" class="game-picture">
-            </div>
-            <div class="second-row">
-                <div class="platforms-container"></div>
-                <div class="date">${jeu.date}</div>
-            </div>
-            <div class="third-row">
-                <p>${jeu.descriptionCourte}</p>
-            </div>
-            <div class="fourth-row">
-                <p>${jeu.descriptionLongue}</p>
-            </div>
-        `;
-
-        const platformsContainer = ficheContainer.querySelector(".platforms-container");
-        for (let x = 0; x < jeu.plateformes.length; x++) {
-
-            let url = jeu.plateformes[x].api_detail_url;
-            url += this.#apiKeyPlateformes;
-            const resRequetePlateforme = await fetch(url);
-            const jsonResRequetePlateforme = await resRequetePlateforme.json();
-            
-            const iconePlateforme = document.createElement("img");
-            iconePlateforme.src = jsonResRequetePlateforme.results.image.icon_url;
-            iconePlateforme.alt = `"logo de la plateforme ${jsonResRequetePlateforme.results.name}"`;
-
-            platformsContainer.append(iconePlateforme);
-        }
-
-        const boutonAjouterFavoris = ficheContainer.querySelector(".cybr-btn");
-        boutonAjouterFavoris.addEventListener("click", () => {
-            DAO.ajouterAuxFavoris(jeu);
-        });
-
-        // Fin affichage du loader
-        App.contentContainer.innerHTML = "";                    
-        App.contentContainer.append(ficheContainer);
     }
 }

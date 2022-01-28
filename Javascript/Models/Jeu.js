@@ -17,6 +17,8 @@ export default class Jeu {
     jsonJeu;
 
     constructor(jsonJeu) {
+        this.jsonJeu = jsonJeu;
+        
         this.nom = jsonJeu.name;
         this.guid = jsonJeu.guid;
 
