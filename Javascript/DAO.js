@@ -1,4 +1,5 @@
 import Jeu from "./Models/Jeu";
+import Modal from "./Composants/Modal";
 
 export default class DAO {
     static #url = "https://www.giantbomb.com/api/games/?api_key=eaa76483af84e465ae49aa95536b55edf29396b4&format=json&filter=name:";
@@ -38,11 +39,16 @@ export default class DAO {
     static ajouterAuxFavoris(jeu) {
         this.#mesJeux.set(jeu.guid, jeu);
         this.#sauvegarderMesFavoris();
+        Modal.afficherAjoutAuxFavoris(jeu);
     }
 
     static retirerDesFavoris(jeu) {
-        this.#mesJeux.delete(jeu.guid);
-        this.#sauvegarderMesFavoris();
+        const choix = Modal.confirmationRetirerDesFavoris(jeu);
+        if (choix === true) {
+            this.#mesJeux.delete(jeu.guid);
+            this.#sauvegarderMesFavoris();
+            Modal.afficherRetraitDesFavoris(jeu);
+        }    
     }
 
     static #sauvegarderMesFavoris() {
