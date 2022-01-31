@@ -56,6 +56,7 @@ export default class DAO {
                 choice.classList.remove("active");
             });
             modalContainer.classList.toggle("active");
+            GestionnaireFavoris.clickBoutonFavoris();
         });
         choices[1].addEventListener("click", () => {
             modalContainer.classList.remove("active");
@@ -66,7 +67,6 @@ export default class DAO {
         this.#mesJeux.delete(jeu.guid);
         this.#sauvegarderMesFavoris();
         Modal.afficherRetraitDesFavoris(jeu);
-        GestionnaireFavoris.clickBoutonFavoris();
     }
 
     static #sauvegarderMesFavoris() {
