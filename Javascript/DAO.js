@@ -43,12 +43,28 @@ export default class DAO {
     }
 
     static retirerDesFavoris(jeu) {
-        const choix = Modal.confirmationRetirerDesFavoris(jeu);
-        if (choix === true) {
-            this.#mesJeux.delete(jeu.guid);
-            this.#sauvegarderMesFavoris();
-            Modal.afficherRetraitDesFavoris(jeu);
-        }    
+
+        Modal.confirmationRetirerDesFavoris(jeu);
+
+        const modalContainer = document.querySelector(".modal-container");          //Tout ça ne devrait pas être dans le DAO mais je n'ai pas réussi à trouver un traitement afin de retourner une valeur de Modal.confirmationRetirerDesFavoris
+        const choices = modalContainer.querySelectorAll(".choice");
+
+        choices[0].addEventListener("click", () => {
+            this.confirmerSuppressionDesFavoris(jeu);
+            choices.forEach(choice => {
+                choice.classList.remove("active");
+            });
+            modalContainer.classList.toggle("active");
+        });
+        choices[1].addEventListener("click", () => {
+            modalContainer.classList.remove("active");
+        });  
+    }
+
+    static confirmerSuppressionDesFavoris(jeu) {
+        this.#mesJeux.delete(jeu.guid);
+        this.#sauvegarderMesFavoris();
+        Modal.afficherRetraitDesFavoris(jeu);
     }
 
     static #sauvegarderMesFavoris() {

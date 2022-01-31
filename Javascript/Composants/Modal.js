@@ -9,7 +9,12 @@ export default class Modal {
 
     static afficherAjoutAuxFavoris(jeu) {
         this.modalParagraph.innerText = `${jeu.nom} a été ajouté aux favoris !`;
+        const buttons = this.modalContainer.querySelectorAll(".choice");
+        buttons.forEach(button => {
+            button.classList.remove("active");
+        });
         this.modalContainer.classList.toggle("active");
+        
 
         if (this.evenementDeclare === false) {
             this.modalTriggers.forEach(trigger => {
@@ -24,6 +29,10 @@ export default class Modal {
     // On peut totalement la fusionner à la première
     static afficherRetraitDesFavoris(jeu) {
         this.modalParagraph.innerText = `${jeu.nom} a été supprimé des favoris.`;
+        const buttons = this.modalContainer.querySelectorAll(".choice");
+        buttons.forEach(button => {
+            button.classList.remove("active");
+        });
         this.modalContainer.classList.toggle("active");
 
         if (this.evenementDeclare === false) {
@@ -36,25 +45,16 @@ export default class Modal {
         } 
     }
 
-    static confirmationRetirerDesFavoris(jeu, callback) {
+    static confirmationRetirerDesFavoris(jeu) {
+        const buttons = this.modalContainer.querySelectorAll(".choice");
+        buttons.forEach(button => {
+            button.classList.add("active");
+        });
         this.modalParagraph.innerText = `Souhaitez-vous réellement supprimer ${jeu.nom} de vos favoris ?`;
-        const choices = this.modalContainer.querySelectorAll(".choice");
-
-        choices.forEach(choice => {
-            choice.classList.toggle("active");
-        });
-
-        choices[0].addEventListener("click", () => {
-            return true;
-        });
-        choices[1].addEventListener("click", () => {
-            return false;
-        });
-
-        this.toggleModal();
+        this.modalContainer.classList.add("active");
     }
 
     static toggleModal() {
-        this.modalContainer.classList.toggle("active")
+        this.modalContainer.classList.toggle("active");
     }
 }
