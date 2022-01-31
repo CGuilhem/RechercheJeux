@@ -1,5 +1,6 @@
 import Jeu from "./Models/Jeu";
 import Modal from "./Composants/Modal";
+import GestionnaireFavoris from "./GestionnaireFavoris";
 
 export default class DAO {
     static #url = "https://www.giantbomb.com/api/games/?api_key=eaa76483af84e465ae49aa95536b55edf29396b4&format=json&filter=name:";
@@ -65,6 +66,7 @@ export default class DAO {
         this.#mesJeux.delete(jeu.guid);
         this.#sauvegarderMesFavoris();
         Modal.afficherRetraitDesFavoris(jeu);
+        GestionnaireFavoris.clickBoutonFavoris();
     }
 
     static #sauvegarderMesFavoris() {
